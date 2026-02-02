@@ -1,0 +1,25 @@
+name: Attendance Bot
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # 5 AM Pakistan (UTC+5)
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run attendance bot
+        run: node attendance.js
